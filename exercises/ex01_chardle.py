@@ -35,6 +35,6 @@ if single == word[4]:
 if repeat == 0:
     print("No instances of " + single + " found in " + word)
 if repeat > 1:
-    print(repeat, "instance of " + single + " found in " + word)
+    print(repeat, "instances of " + single + " found in " + word)
 if repeat == 1:
     print(repeat, "instance of " + single + " found in " + word)

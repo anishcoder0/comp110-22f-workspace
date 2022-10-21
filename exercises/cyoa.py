@@ -1,25 +1,29 @@
 """My game about stopping a hurricane."""
-__author__ = "730574592"
+__author__: str = "730574592"
 import random
-points: int = 0
+points: int = 1
 player: str = ""
-NAMED_CONSTANT = "\U00000000"
+NAMED_CONSTANT: str = "\U00000000"
 MISSION_HAPPY_EMOJI: str = "\U0001F600" 
 MISSION_SAD_EMOJI: str = "\U0001F61E"
 INSTA_STOP_CONGRATS_EMOJI: str = "\U0001F389"
 INSTA_STOP_DEAD_EMOJI: str = "\U0001faa6"
 hurricane: int = 0
-living = True
+living: bool = True
 
 
 def main() -> None:
+    """Main Function to navigate the game."""
     greet()
+    global living
     while living is True:
-        if points > 900:
+        if points >= 10:
             end_game()
-        elif points < 0:
+        elif points <= 0:
+            living = False
             end_game()
-        options: str = int(input("Welcome to the game. Enter 1 for Missions, Enter 2 to try and stop the Hurricane, or enter 3 to quit. \n"))
+        print(f"You currently have {points} points. Reach 10 Points to survive the hurricane. Missions give 1 point.")
+        options: int = int(input("Welcome to the game. Enter 1 for Missions, Enter 2 to try and stop the Hurricane, or enter 3 to quit. \n"))
         options
         if options == 1:
             Missions()
@@ -34,17 +38,18 @@ def main() -> None:
 
 
 def greet() -> None:
+    """Function to aquire users name and store it in global player variable."""
     global player
     player = input('Hello! Welcome to "Stop the Hurricane". What is your name?\n')
     player
 
 
 def Missions() -> None:
+    """Procedure that will allow Player to stop the Hurricane."""
     global player
     global points
     global living
     status: bool = False
-    """Procedure that will allow Player to stop the Hurricane"""
     print(f"Welcome {player}. This will be your chance to stop the hurricane in its path before it destroys you.")
     print(f"Welcome to the Multiplication Challenge {player}! Answer the question correctly to increase your safety range! ")
     while status is False:
@@ -68,34 +73,40 @@ def Missions() -> None:
             status = True
 
 
-def Insta_Stop(points: int) -> int:
+def Insta_Stop(p: int) -> int:
+    """A chance to escape from the hurricane in its in entirety."""
     global player
     global hurricane
     global living
+    global points
     status: bool = False
     print(f"Hello {player}, this is your chance to stop the hurricane instantly! But beware, if you decide to this but lose, you will lose the game instantly!")
-    decision: str = int(input("Would you like to embark on this mission? Type 1 if yes or 2 for no.\n"))
+    decision: int = int(input("Would you like to embark on this mission? Type 1 if yes or 2 for no.\n"))
     while status is False:
         Hard_random_number_1: int = random.randint(0, 100)
         Hard_random_number_2: int = random.randint(0, 100)
         if decision == 1:
             print("Answer the question to instantly stop the hurricane!")
-            question: str = int(input(f"{player}, what is {Hard_random_number_1} * {Hard_random_number_2}: \n"))
+            question: int = int(input(f"{player}, what is {Hard_random_number_1} * {Hard_random_number_2}: \n"))
         if question == (Hard_random_number_1 * Hard_random_number_2):
-            print(f"Your Correct! You have gone far enough and the hurricane will not reach you! Congrats. {INSTA_STOP_CONGRATS_EMOJI}")
+            print(f"Your Correct! You have magically stopped the hurricane! Congrats. {INSTA_STOP_CONGRATS_EMOJI}")
             points += 1000
             status = True
         elif question != (Hard_random_number_1 * Hard_random_number_2):
             print(f"Your incorrect! You were teleported in the hurricane and have died! {INSTA_STOP_DEAD_EMOJI}")
             living = False
             status = True
-    return print(f"You now have {points} points. ")
+    return points
 
 
 def end_game() -> None:
+    """This function will end the game."""
     global points
     global hurricane
+    global living
     print(f"Thanks for playing {player}!")
+    if points >= 1 and points < 10:
+        living = False
     if living is not True:
         print(f"Unfortuntely the hurricane reached you and killed you. You had a grand total of {points} points. ")
         quit()

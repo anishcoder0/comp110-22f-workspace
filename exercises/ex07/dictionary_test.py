@@ -1,7 +1,7 @@
 """Dictionary test for exercise EX07."""
 
 
-__author__: str = 730574592
+__author__: str = "730574592"
 
 
 from exercises.ex07.dictionary import count, invert, favorite_color
@@ -14,7 +14,7 @@ def test_invert_normal() -> None:
 
 
 def test_invert_with_one_case() -> None:
-    """invert with only 1 dictionary pair."""
+    """Invert with only 1 dictionary pair."""
     example: dict[str, str] = {"a": "b"}
     assert invert(example) == {"b": "a"}
 
@@ -32,7 +32,7 @@ def test_favorite_color_normal() -> None:
 
 
 def test_favorite_color_with_one_case() -> None:
-    "Favorite color with only 1 test case."
+    """Favorite color with only 1 test case."""
     example: dict[str, str] = {"K": "orange"}
     assert favorite_color(example) == "orange"
 
